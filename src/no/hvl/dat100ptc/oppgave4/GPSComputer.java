@@ -7,6 +7,8 @@ import no.hvl.dat100ptc.oppgave2.GPSDataConverter;
 import no.hvl.dat100ptc.oppgave2.GPSDataFileReader;
 import no.hvl.dat100ptc.oppgave3.GPSUtils;
 
+import java.lang.reflect.Array;
+
 public class GPSComputer {
 	
 	private GPSPoint[] gpspoints;
@@ -31,68 +33,57 @@ public class GPSComputer {
 
 		double distance = 0;
 
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - SLUTT
-
+		for (int i = 0; i < gpspoints.length-1; i++) {
+			distance += GPSUtils.distance(gpspoints[i], gpspoints[i+1]);
+		}
+		return distance;
 	}
 
 	// beregn totale høydemeter (i meter)
 	public double totalElevation() {
-
 		double elevation = 0;
-
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO - SLUTT
-
+			elevation = gpspoints[gpspoints.length-1].getElevation();
+		return elevation;
 	}
 
 	// beregn total tiden for hele turen (i sekunder)
 	public int totalTime() {
-
-		throw new UnsupportedOperationException(TODO.method());
-
+		int sec = gpspoints[gpspoints.length-1].getTime() - gpspoints[0].getTime();
+		return sec;
 	}
 		
 	// beregn gjennomsnitshastighets mellom hver av gps punktene
 
 	public double[] speeds() {
-		
-		// TODO - START		// OPPGAVE - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		double[] speeds = new double[gpspoints.length-1];
 
-		// TODO - SLUTT
+		for (int i = 0; i <speeds.length; i++) {
+			speeds[i] = GPSUtils.speed(gpspoints[i], gpspoints[i+1]);
+		}
 
+		for(double speed : speeds){
+			System.out.println(speed);
+		}
+		return speeds;
 	}
 	
 	public double maxSpeed() {
-		
-		double maxspeed = 0;
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - SLUTT
-		
+
+		double maxSpeed;
+
+		return GPSUtils.findMax(speeds());
 	}
 
 	public double averageSpeed() {
 
 		double average = 0;
 		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - SLUTT
-		
+		double distance = GPSUtils.distance(gpspoints[0], gpspoints[1]);
+		System.out.println(distance);
+		double time = gpspoints[gpspoints.length-1].getTime() - gpspoints[0].getTime();
+
+		average = distance / time;
+		return average;
 	}
 
 	/*

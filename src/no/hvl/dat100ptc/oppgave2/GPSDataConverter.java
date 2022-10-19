@@ -14,28 +14,32 @@ public class GPSDataConverter {
 
 	public static int toSeconds(String timestr) {
 		
-		int secs;
+		int secs = 0;
 		int hr, min, sec;
 		
-		// TODO
-		// OPPGAVE - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		timestr = timestr.substring(11,19);
+		String[] timeStr = timestr.split(":");
+		hr = Integer.parseInt(timeStr[0]);
+		min = Integer.parseInt(timeStr[1]);
+		sec = Integer.parseInt(timeStr[2]);
 
-		// OPPGAVE - SLUTT
-		
+		secs += hr * 3600;
+		secs += min * 60;
+		secs += sec;
+
+		return secs;
 	}
 
 	public static GPSPoint convert(String timeStr, String latitudeStr, String longitudeStr, String elevationStr) {
 
-		GPSPoint gpspoint;
+		int secs = toSeconds(timeStr);
 
-		// TODO - START ;
-		
-		throw new UnsupportedOperationException(TODO.method());
+		double latitude = Double.parseDouble(latitudeStr);
+		double longitude = Double.parseDouble(longitudeStr);
+		double elevation = Double.parseDouble(elevationStr);
 
-		// OPPGAVE - SLUTT ;
-	    
+		GPSPoint gpspoint = new GPSPoint(secs, latitude, longitude, elevation);
+		return gpspoint;
 	}
 	
 }

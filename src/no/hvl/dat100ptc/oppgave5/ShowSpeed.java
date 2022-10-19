@@ -10,10 +10,12 @@ import no.hvl.dat100ptc.oppgave2.GPSDataFileReader;
 import no.hvl.dat100ptc.oppgave3.GPSUtils;
 import no.hvl.dat100ptc.oppgave4.GPSComputer;
 
+import java.awt.*;
+
 public class ShowSpeed extends EasyGraphics {
 			
 	private static final int MARGIN = 50;
-	private static final int BARHEIGHT = 200; // assume no speed above 200 km/t
+	private static final int BARHEIGHT = 50; // assume no speed above 200 km/t
 
 	private GPSComputer gpscomputer;
 	private GPSPoint[] gpspoints;
@@ -42,16 +44,23 @@ public class ShowSpeed extends EasyGraphics {
 	}
 	
 	public void showSpeedProfile(int ybase, int N) {
-
+		int xIncrement = 0;
 		// get segments speeds from the GPS computer object		
 		double[] speeds = gpscomputer.speeds();
-
-		int x = MARGIN,y;
-
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
-	
-		// TODO - SLUTT
+		for (int i = 0; i < speeds.length; i++) {
+			if(speeds[i] >= 0){
+				Point pointBotom = new Point(xIncrement, ybase);
+				Point pointTop = new Point(xIncrement, (int)speeds[i]);
+				setColor(0, 0, 255);
+				drawLine(pointBotom.x, pointBotom.y, pointTop.x, pointTop.y);
+			}else {
+				System.out.println("kuk");
+				Point pointBotom = new Point(xIncrement, ybase);
+				Point pointTop = new Point(xIncrement, ybase);
+				setColor(0, 0, 255);
+				drawLine(pointBotom.x, pointBotom.y, pointTop.x, pointTop.y);
+			}
+			xIncrement += 2;
+		}
 	}
 }

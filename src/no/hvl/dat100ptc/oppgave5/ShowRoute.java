@@ -8,6 +8,8 @@ import no.hvl.dat100ptc.oppgave1.GPSPoint;
 import no.hvl.dat100ptc.oppgave3.GPSUtils;
 import no.hvl.dat100ptc.oppgave4.GPSComputer;
 
+import java.awt.*;
+
 public class ShowRoute extends EasyGraphics {
 
 	private static int MARGIN = 50;
@@ -36,7 +38,6 @@ public class ShowRoute extends EasyGraphics {
 
 		showRouteMap(MARGIN + MAPYSIZE);
 		
-		showStatistics();
 	}
 
 	// antall x-pixels per lengdegrad
@@ -52,24 +53,20 @@ public class ShowRoute extends EasyGraphics {
 
 	// antall y-pixels per breddegrad
 	public double ystep() {
-	
-		double ystep;
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
 
-		// TODO - SLUTT
+		double maxLat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+		double minLat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
+
+		double yStep = MAPYSIZE / (Math.abs(maxLat - minLat));
+		return yStep;
 		
 	}
 
 	public void showRouteMap(int ybase) {
+		final int RADIUS = 4;
+		fillCircle((int)(gpspoints[9].getLongitude()), (int)(gpspoints[9].getLatitude()), 5);
 
-		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - SLUTT
 	}
 
 	public void showStatistics() {
